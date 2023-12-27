@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Classification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        
+        form {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        input[type="file"] {
+            display: block;
+            margin: 10px auto;
+        }
+        
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #357ae8;
+        }
+        
+        p {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+        
+        li {
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        
+        .uploaded-img {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+            margin: 20px auto;
+            max-width: 500px;
+            max-height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Classification</h1>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*">
+        <input type="submit" value="Upload">
+    </form>
+    <br>
+    {% if prediction_text %}
+        <p>Prediction: {{ prediction_text }}</p>
+
+        {% if probabilities %}
+            <p>Probabilities:</p>
+            <ul>
+                {% for prob in probabilities %}
+                    <li>{{ loop.index0 }}: {{ prob }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
